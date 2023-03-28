@@ -21,32 +21,32 @@ function Home() {
       <div className='px-20 space-y-5 pt-5'>
         <div>Category</div>
         <div className='grid grid-cols-6'>
-          <div className='border border-black w-full h-36'>
+          <div className='border border-black w-full h-24'>
             <div className='text-center'>
               Electronic
             </div>
           </div>
-          <div className='border-y border-r border-black w-full h-36'>
+          <div className='border-y border-r border-black w-full h-24'>
             <div className='text-center'>
               Electronic
             </div>
           </div>
-          <div className='border-y border-r border-black w-full h-36'>
+          <div className='border-y border-r border-black w-full h-24'>
             <div className='text-center'>
               Electronic
             </div>
           </div>
-          <div className='border-y border-r border-black w-full h-36'>
+          <div className='border-y border-r border-black w-full h-24'>
             <div className='text-center'>
               Electronic
             </div>
           </div>
-          <div className='border-y border-r border-black w-full h-36'>
+          <div className='border-y border-r border-black w-full h-24'>
             <div className='text-center'>
               Electronic
             </div>
           </div>
-          <div className='border-y border-r border-black w-full h-36'>
+          <div className='border-y border-r border-black w-full h-24'>
             <div className='text-center'>
               Electronic
             </div>
@@ -68,6 +68,24 @@ function Home() {
         </div>
       </div>
       {/* end search */}
+
+      {/* post */}
+      <div className='px-20 pt-5'>
+        <div className='grid grid-cols-4 gap-6'>
+          <div>
+            <div className='w-full h-80 bg-red-100'>
+
+            </div>
+            <div>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, atque!
+            </div>
+            <div>
+              Rp. 300000
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* end post */}
     </div>
   )
 }
