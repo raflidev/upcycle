@@ -13,8 +13,8 @@ function Home() {
           <div className='text-4xl font-bold'>Welcome to UpCycle</div>
           <div className='text-3xl'>Buy and sell used every items for cheap</div>
           <div className='space-x-8 pt-5 text-xl'>
-            <button className='bg-green-500 text-white px-7 py-2 rounded-full'>Register</button>
-            <button className='bg-gray-400 text-white px-7 py-2 rounded-full'>Login</button>
+            <Link to="/register" className='bg-green-500 text-white px-7 py-2 rounded-full'>Register</Link>
+            <Link to="/login" className='bg-gray-400 text-white px-7 py-2 rounded-full'>Login</Link>
           </div>
         </div>
       </div>
