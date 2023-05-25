@@ -34,26 +34,26 @@ function AddPost() {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log(e.target.files[0]);
 
-
-    console.log('submit')
-    axios.post('http://localhost:8000/api/product', {
-      product_title: name,
-      product_price: price,
-      product_description: description,
-      product_category: selected,
-      product_image: image,
-      user_id: user.id
-    }).then(res => {
+    const tempFile = new FormData()
+    tempFile.append('product_image', image)
+    tempFile.append('product_title', name)
+    tempFile.append('product_description', description)
+    tempFile.append('product_category', selected)
+    tempFile.append('product_price', price)
+    tempFile.append('user_id', user.id)
+    axios.post('http://localhost:8000/api/product', tempFile,
+    ).then(res => {
       console.log(res);
     })
   }
 
   const imageUpload = (e) => {
-    e.preventDefault()
-    console.log(e.target.files[0]);
+    console.log(e.target.files)
     setImage(e.target.files[0])
+    console.log('====================================');
+    console.log(image);
+    console.log('====================================');
   }
 
   return (
