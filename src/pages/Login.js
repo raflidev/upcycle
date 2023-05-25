@@ -52,7 +52,7 @@ function Login() {
     <div>
     { loading &&
       <div
-        className="fixed z-20 h-20 w-20 m-auto inset-x-0 inset-y-0 p-4 bg-white rounded-sm bg-black/50">
+        className="fixed z-20 h-20 w-20 m-auto inset-x-0 inset-y-0 p-4 rounded-sm bg-black/50">
         <div className="flex w-full h-full justify-center">
             <svg className="animate-spin h-18 w-18 text-white w-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -66,7 +66,7 @@ function Login() {
         <div className='w-2/6 space-y-6'>
         {
               showError &&
-              <div className='bg-red-500 w-full py-2 px-4 rounded'>
+              <div className='bg-red-500 w-full py-2 px-4 rounded text-white'>
                 Anda sudah login
               </div>
         }
@@ -84,8 +84,14 @@ function Login() {
             }
             <div className='font-bold text-3xl text-center'>Login</div>
             <form onSubmit={submitHandler} className='space-y-4'>
-                <input type="text" className='w-full border border-black rounded-full px-4 py-2' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input type="password" className='w-full border border-black rounded-full px-4 py-2' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                <div>
+                  <label htmlFor="" className='pb-1 block text-sm'>Username</label>
+                  <input type="text" className='w-full border border-black rounded-full px-4 py-2' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
+                </div>
+                <div>
+                  <label htmlFor="" className='pb-1 block text-sm'>Password</label>
+                  <input type="password" className='w-full border border-black rounded-full px-4 py-2' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                </div>
                 <button className='w-full bg-green-500 rounded-full px-4 py-2'>Submit</button>
                 <div className='float-right'>Doesn’t have an account?, <Link className="font-semibold" to="/register">Click here</Link></div>
             </form>

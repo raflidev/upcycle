@@ -2,8 +2,22 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 function Home() {
+  const [product, setProduct] = React.useState([])
+
+  React.useEffect(() => {
+    axios.get('http://localhost:8000/api/product')
+    .then(res => {
+      setProduct(res.data)
+    })
+  }, [])
+
+  const rupiah = (number)=>{
+    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number).replace(/(\.|,)00$/g, '');
+  }
+
   return (
     <div className='font-inter'>
       <Navbar/>
@@ -74,65 +88,26 @@ function Home() {
       {/* post */}
       <div className='px-20 py-10'>
         <div className='grid grid-cols-4 gap-6'>
-          <Link to="/detail/1" className='flex justify-start'>
-            <div className=' w-5/6'>
-              <div className='w-full h-[26rem] bg-red-100'>
-              </div>
-              <div className='text-lg space-y-3'>
-                <div className=''>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, atque!
-                </div>
-                <div className='text-2xl font-semibold'>
-                  Rp. 300000
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link to="/detail/1" className='flex justify-center'>
-            <div className=' w-5/6'>
-              <div className='w-full h-[26rem] bg-red-100'>
-
-              </div>
-              <div className='text-lg space-y-3'>
-                <div className=''>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, atque!
-                </div>
-                <div className='text-2xl font-semibold'>
-                  Rp. 300000
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link to="/detail/1" className='flex justify-center'>
-            <div className=' w-5/6'>
-              <div className='w-full h-[26rem] bg-red-100'>
-
-              </div>
-              <div className='text-lg space-y-3'>
-                <div className=''>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, atque!
-                </div>
-                <div className='text-2xl font-semibold'>
-                  Rp. 300000
-                </div>
-              </div>
-            </div>
-          </Link>
-          <Link to="/detail/1" className='flex justify-end'>
-            <div className=' w-5/6'>
-              <div className='w-full h-[26rem] bg-red-100'>
-
-              </div>
-              <div className='text-lg space-y-3'>
-                <div className=''>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, atque!
-                </div>
-                <div className='text-2xl font-semibold'>
-                  Rp. 300000
-                </div>
-              </div>
-            </div>
-          </Link>
+        {
+          product.map((item, index) => {
+            return (
+                <Link key={index} to={`/detail/${item.id}`} className='flex justify-start'>
+                  <div className=' w-5/6'>
+                    <div className='w-full h-[26rem] bg-red-100 bg-center bg-cover bg-no-repeat' style={{backgroundImage: `url(http://localhost:8000/images/${item.product_image})`}}>
+                    </div>
+                    <div className='text-lg space-y-3'>
+                      <div className=''>
+                        {item.product_title}
+                      </div>
+                      <div className='text-2xl font-semibold'>
+                        {rupiah(item.product_price)}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+            )
+          })
+        }
         </div>
       </div>
       {/* end post */}

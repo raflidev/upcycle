@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AddPost from "./pages/AddPost";
 import EditProfile from "./pages/EditProfile";
+import Logout from "./pages/Logout";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/post/add" element={<AddPost />} />
         <Route path="/post/edit/:id" element={<AddPost />} />
         <Route path="/profile" element={<EditProfile />} />
+        <Route path="/logout" element={<Logout/>} />
       </Routes>
     </BrowserRouter>
   );
