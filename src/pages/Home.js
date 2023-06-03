@@ -91,11 +91,11 @@ function Home() {
         {
           product.map((item, index) => {
             return (
-                <Link key={index} to={`/detail/${item.id}`} className='flex justify-start'>
-                  <div className=' w-5/6'>
+                <Link key={index} to={`/detail/${item.id}`} className='flex justify-start '>
+                  <div className=' w-5/6  border border-black rounded'>
                     <div className='w-full h-[26rem] bg-red-100 bg-center bg-cover bg-no-repeat' style={{backgroundImage: `url(http://localhost:8000/images/${item.product_image})`}}>
                     </div>
-                    <div className='text-lg space-y-3'>
+                    <div className='text-lg space-y-3 p-3'>
                       <div className=''>
                         {item.product_title}
                       </div>

@@ -11,6 +11,8 @@ import Dashboard from "./pages/Dashboard";
 import AddPost from "./pages/AddPost";
 import EditProfile from "./pages/EditProfile";
 import Logout from "./pages/Logout";
+import EditPost from "./pages/EditPost";
+import ListTransaksi from "./pages/ListTransaksi";
 
 function App() {
   return (
@@ -21,8 +23,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/:status" element={<ListTransaksi />} />
         <Route path="/post/add" element={<AddPost />} />
-        <Route path="/post/edit/:id" element={<AddPost />} />
+        <Route path="/post/edit/:id" element={<EditPost />} />
         <Route path="/profile" element={<EditProfile />} />
         <Route path="/logout" element={<Logout/>} />
       </Routes>

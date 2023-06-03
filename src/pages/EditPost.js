@@ -3,9 +3,10 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import axios from 'axios'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
-function AddPost() {
+function EditPost() {
+  const { id } = useParams()
   const navigate = useNavigate()
   const [name, setName] = React.useState('')
   const [price, setPrice] = React.useState('')
@@ -19,12 +20,6 @@ function AddPost() {
   const [message, setMessage] = React.useState('')
   const [error, setError] = React.useState([])
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'))
-    setUser(user)
-  }, [])
-
-
   const options = [
     {value: 'Electronic'},
     {value: 'Clothes'},
@@ -33,11 +28,34 @@ function AddPost() {
     {value: 'Furniture'},
     {value: 'Other'},
   ];
+
   const [selected, setSelected] = React.useState(options[0].value);
+  
+ 
+
+  useEffect(() => {
+    setLoading(true)
+    const user = JSON.parse(localStorage.getItem('user'))
+    setUser(user)
+
+    axios.get(`http://localhost:8000/api/product/${id}`).then(res => {
+      setName(res.data.product.product_title)
+      setPrice(res.data.product.product_price)
+      setDescription(res.data.product.product_description)
+      setCategory(res.data.product.product_category)
+      options.unshift({value: res.data.product.product_category})
+      setSelected(options[0].value)
+      setLoading(false)
+    })
+  }, [])
+
+  
+
 
   const handleChange = event => {
     setSelected(event.target.value);
   };
+
 
   const submitHandler = (e) => {
     setShowBerhasil(false)
@@ -50,8 +68,7 @@ function AddPost() {
     tempFile.append('product_description', description)
     tempFile.append('product_category', selected)
     tempFile.append('product_price', price)
-    tempFile.append('user_id', user.id)
-    axios.post('http://localhost:8000/api/product', tempFile,
+    axios.post(`http://localhost:8000/api/product/edit/${id}`, tempFile
     ).then(res => {
       if(res.data.status === '200'){
         setShowBerhasil(true)
@@ -114,7 +131,7 @@ function AddPost() {
         </div>
         <div className='space-y-2'>
             <div className='text-xl'>Item Description</div>
-            <textarea className='border border-black px-4 py-2 rounded-xl w-full' onChange={(e) => setDescription(e.target.value)}></textarea>
+            <textarea className='border border-black px-4 py-2 rounded-xl w-full' value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
         </div>
         <div className='space-y-2'>
             <div className='text-xl'>Select Category</div>
@@ -143,4 +160,4 @@ function AddPost() {
   )
 }
 
-export default AddPost
+export default EditPost
