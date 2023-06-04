@@ -13,6 +13,10 @@ function Detail() {
   const [modal, setModal] = React.useState(false)
   const [image, setImage] = React.useState('')
   const [user, setUser] = React.useState('')
+  const [message, setMessage] = React.useState('')
+  const [showBerhasil, setShowBerhasil] = React.useState(false)
+  const [showGagal, setShowGagal] = React.useState(false)
+  const [error, setError] = React.useState([])
 
 
   const { id } = useParams()
@@ -27,7 +31,6 @@ function Detail() {
 
     axios.get(`http://localhost:8000/api/comment/product/${id}`)
     .then(res => {
-      console.log(res.data);
       setComment(res.data.comment)
       setLoading(false)
     })
@@ -54,7 +57,16 @@ function Detail() {
     tempFile.append('user_id', user.id)
     axios.post('http://localhost:8000/api/transaction', tempFile,
     ).then(res => {
-      console.log(res);
+      if(res.data.status === '200'){
+        setShowBerhasil(true)
+        setMessage(res.data.message)
+        setModal(false)
+      }else{
+        setShowGagal(true)
+        setMessage(res.data.message)
+        setModal(false)
+        setError(res.data.error)
+      }
     })
   }
 
@@ -65,7 +77,6 @@ function Detail() {
       user_id: user.id,
       comment_text: textComment,
     }).then(res => {
-      console.log(res);
       // refresh page
       window.location.reload()
     })
@@ -78,7 +89,7 @@ function Detail() {
           className="fixed z-20 h-20 w-20 m-auto inset-x-0 inset-y-0 p-4 rounded-sm bg-black/50">
           <div className="flex w-full h-full justify-center">
               <svg className="animate-spin h-18 w-18 text-white w-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
           </div>
@@ -141,6 +152,24 @@ function Detail() {
                 <div className='flex justify-center items-center'>
                     <div className='w-4/6 space-y-3'>
                         <div>
+                            {
+                              showBerhasil &&
+                              <div className='bg-green-400 w-full py-2 px-4 rounded'>
+                                {message}
+                              </div>
+                            }
+                            {
+                              showGagal &&
+                              <div className='bg-red-500 w-full py-2 px-4 rounded'>
+                                {message}
+                                {Object.keys(error).map((key, i) => (
+                                  <p key={i}>
+                                    <span>{key}: </span>
+                                    <span>{error[key]}</span>
+                                  </p>
+                                ))}
+                              </div>
+                            }
                             <div className='text-3xl font-bold'>{product.product_title}</div>
                             <div className=''>Seller: {product.name}</div>
                         </div>
@@ -186,7 +215,8 @@ function Detail() {
 
                 {
                   comment.map((item, index) => {
-                    return (<div className='space-y-4'>
+                    return (
+                    <div key={index} className='space-y-4'>
                       <div>
                           <div className='font-semibold'>{item.name}</div>
                           <div>

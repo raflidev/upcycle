@@ -35,7 +35,7 @@ function Home() {
 
       {/* category */}
       <div className='px-20 space-y-5 pt-5'>
-        <div>Category</div>
+      <div>Category</div>
         <div className='grid grid-cols-6'>
           <div className='border border-gray-400 w-full h-36'>
             <div className='text-center'>
@@ -44,27 +44,27 @@ function Home() {
           </div>
           <div className='border-y border-r border-gray-400 w-full h-36'>
             <div className='text-center'>
-              Electronic
+              Clothes
             </div>
           </div>
           <div className='border-y border-r border-gray-400 w-full h-36'>
             <div className='text-center'>
-              Electronic
+              Books
             </div>
           </div>
           <div className='border-y border-r border-gray-400 w-full h-36'>
             <div className='text-center'>
-              Electronic
+              Foods Utility
             </div>
           </div>
           <div className='border-y border-r border-gray-400 w-full h-36'>
             <div className='text-center'>
-              Electronic
+              Furniture
             </div>
           </div>
           <div className='border-y border-r border-gray-400 w-full h-36'>
             <div className='text-center'>
-              Electronic
+              Others
             </div>
           </div>
         </div>
