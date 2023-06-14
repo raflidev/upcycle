@@ -72,14 +72,34 @@ function Detail() {
 
   const submitComment = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:8000/api/comment', {
-      product_id: id,
-      user_id: user.id,
-      comment_text: textComment,
-    }).then(res => {
-      // refresh page
-      window.location.reload()
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'http://127.0.0.1:5000/predict',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : JSON.stringify({
+        "text": textComment
+      })
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      axios.post('http://localhost:8000/api/comment', {
+        product_id: id,
+        user_id: user.id,
+        comment_text: textComment,
+        prediksi: response.data.response,
+      }).then(res => {
+        // refresh page
+        window.location.reload()
+      })    
     })
+    .catch((error) => {
+      console.log(error);
+    });
+    
   }
 
   return (
@@ -218,7 +238,10 @@ function Detail() {
                     return (
                     <div key={index} className='space-y-4'>
                       <div>
-                          <div className='font-semibold'>{item.name}</div>
+                          <div className="flex space-x-3 items-center">
+                            <div className='font-semibold'>{item.name}</div>
+                            <div className={`px-2 rounded-xl text-xs text-white ${item.prediksi == "positif" ? 'bg-green-500' : 'bg-red-500'}`}>komentar {item.prediksi}</div>
+                          </div>
                           <div>
                               <div>{item.comment_text}</div>
                               <div className='flex space-x-3 text-sm'>
