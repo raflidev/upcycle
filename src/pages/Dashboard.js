@@ -163,7 +163,10 @@ function Dashboard() {
                                 Harga
                             </th>
                             <th scope="col" className="text-lg font-medium text-gray-900 px-6 py-4 text-left">
-                                Status
+                                Gambar
+                            </th>
+                            <th scope="col" className="text-lg font-medium text-gray-900 px-6 py-4 text-left">
+                                Category
                             </th>
                             <th scope="col" className="text-lg font-medium text-gray-900 px-6 py-4 text-left">
                                 Action
@@ -183,12 +186,11 @@ function Dashboard() {
                                       {rupiah(item.product_price)}
                                   </td>
                                   <td className="text-lg text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                      Success
+                                      <img className='w-32' src={`http://localhost:8000/images/${item.product_image}`} alt="" srcset="" />
                                   </td>
                                   <td className="text-lg text-gray-900 font-light px-6 py-4 whitespace-nowrap space-x-3">
-                                      <Link to={`/post/edit/${item.id}`}>Edit</Link>
-                                      <span>-</span>
-                                      <button onClick={() => deleteHandler(item.id)}>Delete</button>
+                                      <Link to={`/post/edit/${item.id}`} className="py-1 px-2 bg-yellow-400 rounded hover:bg-yellow-500">Edit</Link>
+                                      <button onClick={() => deleteHandler(item.id)} className="py-1 px-2 bg-red-400 rounded hover:bg-red-500">Delete</button>
                                   </td> 
                               </tr>
                               )

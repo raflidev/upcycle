@@ -143,8 +143,8 @@ function ListTransaksi() {
                                   {
                                     item.status === 'pending' &&
                                     <td className="text-lg text-gray-900 font-light px-6 py-4 whitespace-nowrap space-x-3">
-                                        <button onClick={() => TerimaHandler(item.id)}>Konfirmasi</button>
-                                        <button onClick={() => TolakHandler(item.id)}>Tolak</button>
+                                        <button onClick={() => TerimaHandler(item.id)} className="py-1 px-2 bg-green-400 rounded hover:bg-green-500">Konfirmasi</button>
+                                        <button onClick={() => TolakHandler(item.id)} className="py-1 px-2 bg-red-400 rounded hover:bg-red-500">Tolak</button>
                                     </td> 
                                   }
                               </tr>

@@ -31,7 +31,7 @@ function AddPost() {
     {value: 'Books'},
     {value: 'Food Utility'},
     {value: 'Furniture'},
-    {value: 'Other'},
+    {value: 'Others'},
   ];
   const [selected, setSelected] = React.useState(options[0].value);
 

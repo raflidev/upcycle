@@ -13,6 +13,7 @@ import EditProfile from "./pages/EditProfile";
 import Logout from "./pages/Logout";
 import EditPost from "./pages/EditPost";
 import ListTransaksi from "./pages/ListTransaksi";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/post/add" element={<AddPost />} />
         <Route path="/post/edit/:id" element={<EditPost />} />
         <Route path="/profile" element={<EditProfile />} />
+        <Route path="/category/:category" element={<Category />} />
         <Route path="/logout" element={<Logout/>} />
       </Routes>
     </BrowserRouter>

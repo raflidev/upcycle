@@ -61,6 +61,7 @@ function Detail() {
         setShowBerhasil(true)
         setMessage(res.data.message)
         setModal(false)
+        setImage('')
       }else{
         setShowGagal(true)
         setMessage(res.data.message)
